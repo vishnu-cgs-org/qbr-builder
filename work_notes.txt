@@ -1,0 +1,2 @@
+duplicate_and_write_to_slide.py is the new file that duplicates the qbr template and writes the hard coded values (provided in the file)
+to the slides, in the end it prints the full url of the slide to the console 

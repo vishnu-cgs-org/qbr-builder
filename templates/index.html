@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger Script</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Trigger Script</h1>
+        <form action="/filter" method="post">
+            <label for="assigned_crs">Select Assigned CRS:</label>
+            <select id="assigned_crs" name="assigned_crs" required>
+                <option value="" disabled selected>Select an option</option>
+                {% for crs in assigned_crs %}
+                    <option value="{{ crs }}">{{ crs }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Next</button>
+        </form>
+        <p class="status">Status: {{ state }}</p>
+    </div>
+</body>
+</html>

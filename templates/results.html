@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function toggleSelectAll(source) {
+            checkboxes = document.getElementsByName('account_id');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Filtered Results</h1>
+        {% if tables %}
+            <form action="/trigger_by_account" method="post">
+                <table class="data">
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>Total ACV 2024</th>
+                            <th>Total TCV 2024</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in tables %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="account_id" value="{{ row['Account ID'] }}">
+                                    {{ row['Account ID'] }}
+                                </td>
+                                <td>{{ row['Total ACV 2024'] }}</td>
+                                <td>{{ row['Total TCV 2024'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <label>
+                    <input type="checkbox" onclick="toggleSelectAll(this)">
+                    Select All
+                </label>
+                <button type="submit">Trigger</button>
+            </form>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+        <a href="/">Back</a>
+    </div>
+</body>
+</html>
